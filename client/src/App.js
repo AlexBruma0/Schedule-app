@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 const remote = "https://myproject-382821.uc.r.appspot.com/"
-const local = "http://localhost:8081/"
+//const local = "http://localhost:8081/"
 var uri = remote
 function App() {
   const [items, setItems] = useState([])
