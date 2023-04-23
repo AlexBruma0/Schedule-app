@@ -22,7 +22,7 @@ const local = "http://localhost:8081/"
 var uri = local;
 function App() {
   const [items, setItems] = useState([]);
-  const [item, setItem] = useState({ start: "", end: "", date: "" , id: ""});
+  const [item, setItem] = useState({ start: "", end: "", date: "" , id: "", hours:0});
 
   const get = async () => {
     const response = await fetch(uri);
@@ -32,8 +32,12 @@ function App() {
 
   useEffect(() => {
     get().then((data) => {
-      setItems(data);
-    });
+      data.forEach(item => {
+        item.hours = (Number(item.end.split(':')[0] )+12 - Number(item.start.split(':')[0])) + (Number(item.end.split(':')[1] ) - Number(item.start.split(':')[1]))/60
+        console.log(item.hours)
+      })
+      setItems(data)
+    })
     
   });
 
@@ -49,7 +53,7 @@ function App() {
         date: item.date,
       }),
     });
-    setItem({ start: "", end: "", date: "", id: "" });
+    setItem({ start: "", end: "", date: "", id: "", hours:0});
   };
   const Delete = async (id) => {
     await fetch(`${uri}${id}`, {
@@ -64,7 +68,7 @@ function App() {
         <form onSubmit={post}>
           <Box display="flex" m="7%">
             <Input
-              placeholder="start"
+              placeholder="From"
               variant="unstyled"
               colorScheme="blue"
               onChange={(e) => {
@@ -77,7 +81,7 @@ function App() {
               }}
             ></Input>
             <Input
-              placeholder="end"
+              placeholder="To"
               variant="unstyled"
               onChange={(e) => {
                 setItem({
@@ -106,13 +110,13 @@ function App() {
         </Box>
         
 
-        <Heading ml = '-23%'>Data table</Heading>
-        <TableContainer>
+        <Heading ml = '-6.5%'>Pay period: April 24 - May 8</Heading>
+        <TableContainer ml = '-7%'>
           <Table variant="striped" colorScheme="blackAlpha" size="md">
             <Thead color="red">
               <Tr color="red" fontSize="md">
-                <Th>Start</Th>
-                <Th>End</Th>
+                <Th>From</Th>
+                <Th>To</Th>
                 <Th>Hours</Th>
                 <Th>Date</Th>
               </Tr>
@@ -123,7 +127,7 @@ function App() {
                   <Tr color="gray.400" fontSize="md">
                     <Td>{item.start}</Td>
                     <Td>{item.end}</Td>
-                    <Td>8</Td>
+                    <Td>{item.hours}</Td>
 
                     <Td>{item.date}</Td>
                     <Td>
