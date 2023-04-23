@@ -1,8 +1,12 @@
 import './App.css';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, Heading, Stack, StackDivider, Box, Text } from '@chakra-ui/react'
+
+
 import { Input } from '@chakra-ui/react'
 const remote = "https://myproject-382821.uc.r.appspot.com/"
+
 //const local = "http://localhost:8081/"
 var uri = remote
 function App() {
@@ -15,6 +19,12 @@ function App() {
     console.log(json)
     setItems(json.result)
   }
+
+  useEffect(() =>{
+    get()
+  }
+  )
+
   const post = async(e) =>{
     e.preventDefault()
     console.log(item)
@@ -34,7 +44,7 @@ function App() {
       method: "DELETE",})
   }
   return (
-    <div className="App">
+    <div className="App" >
       <header className="App-header">
         <form onSubmit={post}>
           <Input placeholder='start'
@@ -55,20 +65,39 @@ function App() {
           ></Input>
           <Button colorScheme='white' variant='outline' type='submit'>Add</Button>
         </form>
-        <Button colorScheme='white' variant='outline'onClick= {get}>
-          get
-        </Button>
         <Button colorScheme='white' variant='outline'onClick= {Delete}>
           delete all
         </Button>
-        <ul>
-          {items.map((item,i) =>{
+        <Card w='30%'>
+
+  <CardBody bg='gray.600' borderRadius = 'md' color='white' w >
+    <Stack divider={<StackDivider />} spacing='4'>
+    {items.map((item,i) =>{
             return(
-              <li key={i}>Start: {item.start} End: {item.end} Date: {item.date} </li>
+              <Box>
+              <Heading size='xs' textTransform='uppercase' >
+                {item.date}
+              </Heading>
+              <Box display='flex'>
+
+                <Box pt='2' fontSize='sm' float="left" display='flex'>
+                  <Text color='gray.400'>Start:</Text>{item.start}
+                </Box>
+                
+                <Box pt='2' fontSize='sm' ml='80% ' display='flex' position='absolute'>
+                < Text color='gray.400'>End:</Text> {item.end} 
+                </Box>
+              </Box>
+
+
+            </Box>
             )
             
           })}
-        </ul>
+   
+    </Stack>
+  </CardBody>
+</Card>
 
       </header>
     </div>
