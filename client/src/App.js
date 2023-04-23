@@ -1,47 +1,40 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
   Heading,
-  Stack,
-  StackDivider,
   Box,
-  Text,
 } from "@chakra-ui/react";
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
 
 import { Input } from "@chakra-ui/react";
-const remote = "https://myproject-382821.uc.r.appspot.com/";
+//const remote = "https://myproject-382821.uc.r.appspot.com/";
 
-//const local = "http://localhost:8081/"
-var uri = remote;
+const local = "http://localhost:8081/"
+var uri = local;
 function App() {
   const [items, setItems] = useState([]);
-  const [item, setItem] = useState({ start: "", end: "", date: "" });
+  const [item, setItem] = useState({ start: "", end: "", date: "" , id: ""});
 
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
-    console.log(json);
-    setItems(json.result);
+    return json.result
   };
 
   useEffect(() => {
-    get();
+    get().then((data) => {
+      setItems(data);
+    });
+    
   });
 
   const post = async (e) => {
@@ -56,17 +49,17 @@ function App() {
         date: item.date,
       }),
     });
-    setItem({ start: "", end: "", date: "" });
+    setItem({ start: "", end: "", date: "", id: "" });
   };
-  const Delete = async () => {
-    await fetch(uri, {
+  const Delete = async (id) => {
+    await fetch(`${uri}${id}`, {
       method: "DELETE",
     });
   };
   return (
     <div className="App">
       <header className="App-header">
-        <Heading ml = '-23%'>Add Hours</Heading>
+        <Heading ml = '-29%'>Add</Heading>
         <Box ml = '-4%'>
         <form onSubmit={post}>
           <Box display="flex" m="7%">
@@ -112,9 +105,7 @@ function App() {
         </form>
         </Box>
         
-        {/* <Button colorScheme='white' variant='outline'onClick= {Delete}>
-          delete all
-        </Button> */}
+
         <Heading ml = '-23%'>Data table</Heading>
         <TableContainer>
           <Table variant="striped" colorScheme="blackAlpha" size="md">
@@ -136,11 +127,13 @@ function App() {
 
                     <Td>{item.date}</Td>
                     <Td>
-                      <Button colorScheme="linkedin ">❌</Button>
+                      <Button colorScheme="linkedin " onClick= {() => Delete(item._id)}
+                      
+                      >❌</Button>
                     </Td>
-                    <Td>
+                    {/* <Td>
                       <Button colorScheme="linkedin ">✏️</Button>
-                    </Td>
+                    </Td> */}
                   </Tr>
                 );
               })}
