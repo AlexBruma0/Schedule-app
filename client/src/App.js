@@ -59,7 +59,14 @@ function App() {
     await fetch(`${uri}${id}`, {
       method: "DELETE",
     });
+
+
   };
+  const hours = 0 + (items[0]?.hours?items[0]?.hours: 0) + (items[1]?.hours?items[1]?.hours: 0) +(items[2]?.hours?items[2]?.hours: 0)+ 
+  (items[3]?.hours?items[3]?.hours: 0) + (items[4]?.hours?items[4]?.hours: 0) +(items[5]?.hours?items[5]?.hours: 0)
+  + (items[6]?.hours?items[6]?.hours: 0) + (items[7]?.hours?items[7]?.hours: 0) +(items[8]?.hours?items[8]?.hours: 0)+ 
+  (items[9]?.hours?items[9]?.hours: 0) + (items[10]?.hours?items[10]?.hours: 0) +(items[11]?.hours?items[11]?.hours: 0)
+  + (items[12]?.hours?items[12]?.hours: 0) +(items[13]?.hours?items[13]?.hours: 0) ;
   return (
     <div className="App">
       <Box className="App-header" border='1px'>
@@ -110,7 +117,7 @@ function App() {
         </Box>
         
 
-        <Heading mt = '3%' textAlign='left' >Pay period: April 24 - May 8</Heading>
+        <Heading mt = '3%' textAlign='left' >April 24 - May 8</Heading>
         <TableContainer >
           <Table variant="striped" colorScheme="blackAlpha" size="md">
             <Thead color="red">
@@ -147,13 +154,14 @@ function App() {
             <Thead color="red">
               <Tr color="red" fontSize="md">
                 <Th>Hours</Th>
-                <Th>Amount</Th>
+                <Th>Amount $</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr color="gray.400" fontSize="md">
-                <Td>0</Td>
-                <Td>0</Td>
+                <Td > {hours}</Td>
+                <Td>{hours * 40}</Td>
+
               </Tr>
             </Tbody>
           </Table>
