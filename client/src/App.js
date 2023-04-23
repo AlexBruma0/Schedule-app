@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Input } from "@chakra-ui/react";
-//const remote = "https://myproject-382821.uc.r.appspot.com/";
+const remote = "https://myproject-382821.uc.r.appspot.com/";
 
 const local = "http://localhost:8081/"
 var uri = local;
@@ -155,8 +155,8 @@ function App() {
             </Thead>
             <Tbody>
               <Tr color="gray.400" fontSize="md">
-                <Td>40</Td>
-                <Td>2000</Td>
+                <Td>0</Td>
+                <Td>0</Td>
               </Tr>
             </Tbody>
           </Table>

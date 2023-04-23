@@ -41,8 +41,9 @@ app.get("/", async(req,res) =>{
     res.json({result});
 
 })
-app.delete("/", async(req,res) =>{
-    await Item.deleteMany()
+app.delete("/:id", async(req,res) =>{
+    console.log(req.params.id)
+    await Item.deleteOne({ _id: req.params.id });
 })
 
 const PORT = process.env.PORT || 8081;
