@@ -67,6 +67,14 @@ function App() {
   + (items[6]?.hours?items[6]?.hours: 0) + (items[7]?.hours?items[7]?.hours: 0) +(items[8]?.hours?items[8]?.hours: 0)+ 
   (items[9]?.hours?items[9]?.hours: 0) + (items[10]?.hours?items[10]?.hours: 0) +(items[11]?.hours?items[11]?.hours: 0)
   + (items[12]?.hours?items[12]?.hours: 0) +(items[13]?.hours?items[13]?.hours: 0) ;
+
+  const overtimeHours = (items[0]?.hours?(items[0]?.hours>8? items[0]?.hours - 8 :0): 0) + (items[1]?.hours?(items[1]?.hours>8? items[1]?.hours - 8 :0): 0)
+  + (items[2]?.hours?(items[2]?.hours>8? items[2]?.hours - 8 :0): 0) + (items[3]?.hours?(items[3]?.hours>8? items[3]?.hours - 8 :0): 0)
+  + (items[4]?.hours?(items[4]?.hours>8? items[4]?.hours - 8 :0): 0) + (items[5]?.hours?(items[5]?.hours>8? items[5]?.hours - 8 :0): 0)
+  + (items[2]?.hours?(items[6]?.hours>8? items[6]?.hours - 8 :0): 0) + (items[7]?.hours?(items[7]?.hours>8? items[7]?.hours - 8 :0): 0)
+  + (items[2]?.hours?(items[8]?.hours>8? items[8]?.hours - 8 :0): 0) + (items[9]?.hours?(items[9]?.hours>8? items[9]?.hours - 8 :0): 0)
+  + (items[2]?.hours?(items[10]?.hours>8? items[10]?.hours - 8 :0): 0) + (items[11]?.hours?(items[11]?.hours>8? items[11]?.hours - 8 :0): 0)
+  + (items[2]?.hours?(items[12]?.hours>8? items[12]?.hours - 8 :0): 0) + (items[13]?.hours?(items[13]?.hours>8? items[13]?.hours - 8 :0): 0)
   return (
     <div className="App">
       <Box className="App-header" border='1px'>
@@ -153,16 +161,26 @@ function App() {
           <Table variant="striped" colorScheme="blackAlpha" size="md">
             <Thead color="red">
               <Tr color="red" fontSize="md">
-                <Th>Hours</Th>
+                <Th>Regular Hours</Th>
+                <Th>Overtime Hours</Th>
                 <Th>Amount $</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr color="gray.400" fontSize="md">
-                <Td > {hours}</Td>
-                <Td>{hours * 40}</Td>
 
+
+
+                {((hours - overtimeHours) <=80) && 
+                              <Tr color="gray.400" fontSize="md">
+                                <Td > {hours - overtimeHours}</Td>
+                                <Td>{overtimeHours}</Td>
+                  <Td>{(hours - overtimeHours) * 40 + (overtimeHours * 40 *1.5)}</Td>
               </Tr>
+
+                }
+                
+
+
             </Tbody>
           </Table>
         </TableContainer>
