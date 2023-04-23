@@ -66,7 +66,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Heading float="left">Add Hours</Heading>
+        <Heading ml = '-23%'>Add Hours</Heading>
+        <Box ml = '-4%'>
         <form onSubmit={post}>
           <Box display="flex" m="7%">
             <Input
@@ -109,10 +110,12 @@ function App() {
             </Button>
           </Box>
         </form>
+        </Box>
+        
         {/* <Button colorScheme='white' variant='outline'onClick= {Delete}>
           delete all
         </Button> */}
-        <Heading float="left">Data table</Heading>
+        <Heading ml = '-23%'>Data table</Heading>
         <TableContainer>
           <Table variant="striped" colorScheme="blackAlpha" size="md">
             <Thead color="red">
@@ -144,8 +147,8 @@ function App() {
             </Tbody>
           </Table>
         </TableContainer>
-        <Heading float="left">Total</Heading>
-        <TableContainer>
+        <Heading ml = '-27.5%'>Total</Heading>
+        <TableContainer ml = '-23%'>
           <Table variant="striped" colorScheme="blackAlpha" size="md">
             <Thead color="red">
               <Tr color="red" fontSize="md">
