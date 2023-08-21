@@ -38,7 +38,8 @@ app.post("/", async(req,res) =>{
 })
 app.get("/", async(req,res) =>{
     const result = await Item.find()
-    res.json({result});
+    //res.json({result});
+    res.send('hi')
 
 })
 app.delete("/:id", async(req,res) =>{

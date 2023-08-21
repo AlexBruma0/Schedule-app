@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Input } from "@chakra-ui/react";
-const remote = "https://myproject-382821.uc.r.appspot.com/";
+const remote = "https://server-4wnxsuaw3a-uc.a.run.app/";
 
 //const local = "http://localhost:8081/"
 var uri = remote;
